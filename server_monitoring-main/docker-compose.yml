@@ -14,7 +14,7 @@ services:
       IOC_FILE: ${IOC_FILE:-/app/static/ioc_hashes.txt}
       SUSPICIOUS_HASHES: ${SUSPICIOUS_HASHES:-}
     volumes:
-      - appdata:/data          # NEW: writable volume for SQLite
+      - appdata:/data
       - ./APP/logs:/app/logs
     ports:
       - "8000:8000"
@@ -31,7 +31,7 @@ services:
     container_name: monitoring-agent
     depends_on:
       app:
-        condition: service_healthy     # NEW: wait for app health
+        condition: service_healthy
     volumes:
       - ${HOST_SCAN_PATH:-/tmp}:/host:ro
     env_file: .env
@@ -49,4 +49,4 @@ services:
       - "host.docker.internal:host-gateway"
 
 volumes:
-  appdata:                        # NEW
+  appdata:
